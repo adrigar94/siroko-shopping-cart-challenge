@@ -14,8 +14,7 @@
         "symfony/runtime": "7.0.*",
         "symfony/yaml": "7.0.*"
     },
-    "require-dev": {
-    },
+    "require-dev": {},
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,
@@ -26,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Adrian\\SirokoShoppingCart\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Adrian\\SirokoShoppingCart\\Tests\\": "tests/"
         }
     },
     "replace": {
