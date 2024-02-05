@@ -16,6 +16,12 @@ class CartTest extends TestCase
         $this->assertInstanceOf(Cart::class, $cart);
     }
 
+    public function testGetCartUuid()
+    {
+        $cart = CartMother::createEmpty();
+        $this->assertIsString($cart->uuid());
+    }
+
     public function testAddItem()
     {
         $cart = CartMother::createEmpty();
@@ -39,6 +45,34 @@ class CartTest extends TestCase
         $this->assertEquals(2, $cart->totalItems());
     }
 
+    public function testUpdateItem()
+    {
+        $product = ProductMother::random();
+        $cart = CartMother::createEmpty();
+
+        $cart->addItem(new CartItem($product, 1));
+        $this->assertEquals(1, $cart->totalItems());
+
+        $cart->updateItem(new CartItem($product, 3));
+        $this->assertEquals(3, $cart->totalItems());
+    }
+
+    public function testUpdateNonexistentItem()
+    {
+        $product = ProductMother::random();
+        $cart = CartMother::createEmpty();
+
+        $cart->addItem(new CartItem($product, 1));
+        $this->assertEquals(1, $cart->totalItems());
+
+
+        $otherProduct = ProductMother::random();
+
+        $this->expectExceptionCode(404);
+        $cart->updateItem(new CartItem($otherProduct, 3));
+
+    }
+
     public function testRemoveItem()
     {
         $product = ProductMother::random();
@@ -52,16 +86,20 @@ class CartTest extends TestCase
         $this->assertEquals(1, $cart->totalItems());
     }
 
-    public function testUpdateItem()
+    public function testRemoveIdemItem()
     {
         $product = ProductMother::random();
         $cart = CartMother::createEmpty();
 
-        $cart->addItem(new CartItem($product, 1));
+        $cart->addItem(new CartItem($product, 2));
+        $cart->addItem(CartItemMother::create());
+        $this->assertEquals(3, $cart->totalItems());
+
+        $cart->removeItem($product->uuid);
         $this->assertEquals(1, $cart->totalItems());
 
-        $cart->updateItem(new CartItem($product, 3));
-        $this->assertEquals(3, $cart->totalItems());
+        $cart->removeItem($product->uuid);
+        $this->assertEquals(1, $cart->totalItems());
     }
 
     public function testGetTotalItems()
