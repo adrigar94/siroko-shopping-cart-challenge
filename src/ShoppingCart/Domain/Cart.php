@@ -11,7 +11,7 @@ class Cart
     {
     }
 
-    public function id(): string
+    public function uuid(): string
     {
         return $this->uuid;
     }
@@ -19,10 +19,10 @@ class Cart
     public function addItem(CartItem $cartItem): void
     {
         if (isset($this->items[$cartItem->productId()])) {
-            // Cuando el producto ya esta en una linea del carrito y volvemos a añadirlo tenemos 2 posibilidades:
-            // 1. Sumar la cantidad del producto al carrito, como si quisieramos añadir más.
-            // 2. La idempotencia. Actualizar la cantidad del producto en el carrito ignorando que ya existía.  
-            // En este caso opto por la opción 2.
+            // When the product is already on a cart line and we add it again, we have two options:
+            // 1. Add the quantity of the product to the cart, as if we wanted to add more.
+            // 2. Idempotence. Update the quantity of the product in the cart, ignoring that it already existed.
+            // In this case, I opt for option 2.
             $this->updateItem($cartItem);
             return;
         }
@@ -47,6 +47,7 @@ class Cart
     public function removeItem(string $productId): void
     {
         if (!isset($this->items[$productId])) {
+            // idempotence. we ignore that it does not exist instead of returning an exception.
             return;
         }
         $this->totalItems -= $this->items[$productId]->quantity;
