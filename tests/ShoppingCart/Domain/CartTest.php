@@ -6,6 +6,7 @@ namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Domain;
 
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\Cart;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartItem;
+use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartStatus;
 use PHPUnit\Framework\TestCase;
 
 class CartTest extends TestCase
@@ -16,10 +17,22 @@ class CartTest extends TestCase
         $this->assertInstanceOf(Cart::class, $cart);
     }
 
-    public function testGetCartUuid()
+    public function testCartParamsCorrectTpye()
     {
         $cart = CartMother::createEmpty();
         $this->assertIsString($cart->uuid());
+        $this->assertIsString($cart->userUuid());
+        $this->assertInstanceOf(CartStatus::class, $cart->status());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $cart->createdAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $cart->updatedAt());
+    }
+
+    public function testConfirmCart()
+    {
+        $cart = CartMother::createEmpty();
+        $this->assertEquals(CartStatus::OPEN, $cart->status());
+        $cart->confirm();
+        $this->assertEquals(CartStatus::CONFIRMED, $cart->status());
     }
 
     public function testAddItem()
@@ -125,6 +138,28 @@ class CartTest extends TestCase
             $count += $item->quantity;
         }
         $this->assertEquals(3, $count);
+    }
+
+    public function testUpdatedAt()
+    {
+        $cart = CartMother::createEmpty();
+        $cartItem = CartItemMother::create();
+
+        $originalUpdateAt = $cart->updatedAt();
+        $cart->addItem($cartItem);
+        $this->assertGreaterThan($originalUpdateAt, $cart->updatedAt());
+
+        $originalUpdateAt = $cart->updatedAt();
+        $cart->updateItem($cartItem);
+        $this->assertGreaterThan($originalUpdateAt, $cart->updatedAt());
+
+        $originalUpdateAt = $cart->updatedAt();
+        $cart->removeItem($cartItem->productId());
+        $this->assertGreaterThan($originalUpdateAt, $cart->updatedAt());
+
+        $originalUpdateAt = $cart->updatedAt();
+        $cart->confirm();
+        $this->assertGreaterThan($originalUpdateAt, $cart->updatedAt());
     }
 
 }
