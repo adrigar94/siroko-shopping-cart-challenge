@@ -12,6 +12,6 @@ class CartItem
 
     public function productId(): string
     {
-        return $this->product->uuid;
+        return $this->product->sku;
     }
 }

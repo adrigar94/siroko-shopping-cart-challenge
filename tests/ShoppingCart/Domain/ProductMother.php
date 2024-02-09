@@ -12,9 +12,11 @@ class ProductMother
     {
         $faker = \Faker\Factory::create();
         return new Product(
-            $faker->uuid(),
+            $faker->ean8(),
             $faker->title(),
-            $faker->randomFloat(2, 0, 300)
+            $faker->randomNumber(),
+            $faker->url(),
+            $faker->url(),
         );
     }
 }

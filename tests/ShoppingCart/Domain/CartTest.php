@@ -88,30 +88,34 @@ class CartTest extends TestCase
 
     public function testRemoveItem()
     {
-        $product = ProductMother::random();
         $cart = CartMother::createEmpty();
 
-        $cart->addItem(new CartItem($product, 2));
+        $product = ProductMother::random();
+        $cartItem = new CartItem($product, 2);
+
+        $cart->addItem($cartItem);
         $cart->addItem(CartItemMother::create());
         $this->assertEquals(3, $cart->totalItems());
 
-        $cart->removeItem($product->uuid);
+        $cart->removeItem($cartItem->productId());
         $this->assertEquals(1, $cart->totalItems());
     }
 
     public function testRemoveIdemItem()
     {
-        $product = ProductMother::random();
         $cart = CartMother::createEmpty();
 
-        $cart->addItem(new CartItem($product, 2));
+        $product = ProductMother::random();
+        $cartItem = new CartItem($product, 2);
+
+        $cart->addItem($cartItem);
         $cart->addItem(CartItemMother::create());
         $this->assertEquals(3, $cart->totalItems());
 
-        $cart->removeItem($product->uuid);
+        $cart->removeItem($cartItem->productId());
         $this->assertEquals(1, $cart->totalItems());
 
-        $cart->removeItem($product->uuid);
+        $cart->removeItem($cartItem->productId());
         $this->assertEquals(1, $cart->totalItems());
     }
 
