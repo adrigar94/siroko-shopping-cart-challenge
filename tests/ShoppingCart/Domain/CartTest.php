@@ -39,23 +39,11 @@ class CartTest extends TestCase
     {
         $cart = CartMother::createEmpty();
 
-        $cart->addItem(CartItemMother::create());
+        $cart->upsertItem(CartItemMother::create());
         $this->assertEquals(1, $cart->totalItems());
 
-        $cart->addItem(CartItemMother::create(2));
+        $cart->upsertItem(CartItemMother::create(2));
         $this->assertEquals(3, $cart->totalItems());
-    }
-
-    public function testAddEqualItem()
-    {
-        $product = ProductMother::random();
-        $cart = CartMother::createEmpty();
-
-        $cart->addItem(new CartItem($product, 1));
-        $this->assertEquals(1, $cart->totalItems());
-
-        $cart->addItem(new CartItem($product, 2));
-        $this->assertEquals(2, $cart->totalItems());
     }
 
     public function testUpdateItem()
@@ -63,27 +51,11 @@ class CartTest extends TestCase
         $product = ProductMother::random();
         $cart = CartMother::createEmpty();
 
-        $cart->addItem(new CartItem($product, 1));
+        $cart->upsertItem(new CartItem($product, 1));
         $this->assertEquals(1, $cart->totalItems());
 
-        $cart->updateItem(new CartItem($product, 3));
+        $cart->upsertItem(new CartItem($product, 3));
         $this->assertEquals(3, $cart->totalItems());
-    }
-
-    public function testUpdateNonexistentItem()
-    {
-        $product = ProductMother::random();
-        $cart = CartMother::createEmpty();
-
-        $cart->addItem(new CartItem($product, 1));
-        $this->assertEquals(1, $cart->totalItems());
-
-
-        $otherProduct = ProductMother::random();
-
-        $this->expectExceptionCode(404);
-        $cart->updateItem(new CartItem($otherProduct, 3));
-
     }
 
     public function testRemoveItem()
@@ -93,8 +65,8 @@ class CartTest extends TestCase
         $product = ProductMother::random();
         $cartItem = new CartItem($product, 2);
 
-        $cart->addItem($cartItem);
-        $cart->addItem(CartItemMother::create());
+        $cart->upsertItem($cartItem);
+        $cart->upsertItem(CartItemMother::create());
         $this->assertEquals(3, $cart->totalItems());
 
         $cart->removeItem($cartItem->productId());
@@ -108,8 +80,8 @@ class CartTest extends TestCase
         $product = ProductMother::random();
         $cartItem = new CartItem($product, 2);
 
-        $cart->addItem($cartItem);
-        $cart->addItem(CartItemMother::create());
+        $cart->upsertItem($cartItem);
+        $cart->upsertItem(CartItemMother::create());
         $this->assertEquals(3, $cart->totalItems());
 
         $cart->removeItem($cartItem->productId());
@@ -123,9 +95,9 @@ class CartTest extends TestCase
     {
         $cart = CartMother::createEmpty();
 
-        $cart->addItem(CartItemMother::create(3));
-        $cart->addItem(CartItemMother::create());
-        $cart->addItem(CartItemMother::create());
+        $cart->upsertItem(CartItemMother::create(3));
+        $cart->upsertItem(CartItemMother::create());
+        $cart->upsertItem(CartItemMother::create());
         $this->assertEquals(5, $cart->totalItems());
     }
 
@@ -133,8 +105,8 @@ class CartTest extends TestCase
     {
         $cart = CartMother::createEmpty();
 
-        $cart->addItem(CartItemMother::create());
-        $cart->addItem(CartItemMother::create(2));
+        $cart->upsertItem(CartItemMother::create());
+        $cart->upsertItem(CartItemMother::create(2));
 
         $count = 0;
         foreach ($cart->items() as $item) {
@@ -150,11 +122,11 @@ class CartTest extends TestCase
         $cartItem = CartItemMother::create();
 
         $originalUpdateAt = $cart->updatedAt();
-        $cart->addItem($cartItem);
+        $cart->upsertItem($cartItem);
         $this->assertGreaterThan($originalUpdateAt, $cart->updatedAt());
 
         $originalUpdateAt = $cart->updatedAt();
-        $cart->updateItem($cartItem);
+        $cart->upsertItem($cartItem);
         $this->assertGreaterThan($originalUpdateAt, $cart->updatedAt());
 
         $originalUpdateAt = $cart->updatedAt();
