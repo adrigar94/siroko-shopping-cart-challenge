@@ -17,4 +17,17 @@ class CartMother
             Uuid::uuid4()->__toString()
         );
     }
+
+    public static function createOpenWithProducts(): Cart
+    {
+        $cart = Cart::create(
+            Uuid::uuid4()->__toString(),
+            Uuid::uuid4()->__toString()
+        );
+
+        $cart->upsertItem(CartItemMother::create(1));
+        $cart->upsertItem(CartItemMother::create(2));
+
+        return $cart;
+    }
 }
