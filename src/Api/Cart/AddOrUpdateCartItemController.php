@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Adrian\SirokoShoppingCart\Api\Cart;
 
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\AddOrUpdate\AddOrUpdateCartItemDto;
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\AddOrUpdate\AddOrUpdateCartItemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +25,7 @@ class AddOrUpdateCartItemController extends AbstractController
 
         $cartItemDto = $this->mapRequestToDto($request);
 
-        $this->addOrUpdateCartItemService->__invoke($userUuid, $sku, $cartItemDto);
+        $this->addOrUpdateCartItemService->__invoke($userUuid, $cartItemDto);
 
         return $this->json([], JsonResponse::HTTP_OK);
     }
@@ -41,7 +43,7 @@ class AddOrUpdateCartItemController extends AbstractController
     {
         $requestData = json_decode($request->getContent(), true);
 
-        $requiredFields = ['user_uuid', 'sku', 'name', 'priceInCents', 'url', 'thumbnail', 'quantity'];
+        $requiredFields = ['sku', 'name', 'priceInCents', 'url', 'thumbnail', 'quantity'];
         foreach ($requiredFields as $field) {
             if (!isset($requestData[$field])) {
                 throw new \InvalidArgumentException("$field is required");
@@ -49,7 +51,6 @@ class AddOrUpdateCartItemController extends AbstractController
         }
 
         return new AddOrUpdateCartItemDto(
-            $requestData['user_uuid'],
             $requestData['sku'],
             $requestData['name'],
             $requestData['priceInCents'],
