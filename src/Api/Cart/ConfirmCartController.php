@@ -23,7 +23,7 @@ class ConfirmCartController extends AbstractController
 
         $this->confirmCartService->__invoke($userUuid);
 
-        return $this->json([], JsonResponse::HTTP_OK);
+        return $this->json([], JsonResponse::HTTP_NO_CONTENT);
     }
 
     private function getUserUuidFromRequest(Request $request): string

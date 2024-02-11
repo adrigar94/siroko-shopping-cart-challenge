@@ -27,7 +27,7 @@ class AddOrUpdateCartItemController extends AbstractController
 
         $this->addOrUpdateCartItemService->__invoke($userUuid, $cartItemDto);
 
-        return $this->json([], JsonResponse::HTTP_OK);
+        return $this->json([], JsonResponse::HTTP_NO_CONTENT);
     }
 
     private function getUserUuidFromRequest(Request $request): string
