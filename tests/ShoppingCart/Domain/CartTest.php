@@ -138,4 +138,24 @@ class CartTest extends TestCase
         $this->assertGreaterThan($originalUpdateAt, $cart->updatedAt());
     }
 
+
+    public function testCartToNative()
+    {
+        $cart = CartMother::createOpenWithProducts();
+        $native = $cart->toNative();
+
+        $this->assertIsArray($native);
+    }
+
+    public function testCartFromNative()
+    {
+        $cart = CartMother::createOpenWithProducts();
+        $native = $cart->toNative();
+
+        $restoredCart = Cart::fromNative($native);
+
+        $this->assertInstanceOf(Cart::class, $restoredCart);
+        $this->assertEquals($cart, $restoredCart);
+    }
+
 }

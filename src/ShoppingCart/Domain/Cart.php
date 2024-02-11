@@ -115,8 +115,8 @@ class Cart
             'uuid' => $this->uuid,
             'user_uuid' => $this->userUuid,
             'status' => $this->status->value,
-            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s'),
+            'created_at' => $this->createdAt->format('Y-m-d H:i:s.u'),
+            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s.u'),
             'items' => $itemsNative,
             'totalItems' => $this->totalItems
         ];
@@ -134,8 +134,8 @@ class Cart
             $native['uuid'],
             $native['user_uuid'],
             CartStatus::from($native['status']),
-            DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $native['created_at']),
-            DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $native['updated_at']),
+            DateTimeImmutable::createFromFormat('Y-m-d H:i:s.u', $native['created_at']),
+            DateTimeImmutable::createFromFormat('Y-m-d H:i:s.u', $native['updated_at']),
             $native['totalItems'],
             $cartItems
         );
