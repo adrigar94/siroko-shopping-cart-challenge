@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Adrian\SirokoShoppingCart\ShoppingCart\Application\Confirm;
 
-use Adrian\SirokoShoppingCart\ShoppingCart\Domain\Cart;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
-use Ramsey\Uuid\Uuid;
 
 class ConfirmCartService
 {

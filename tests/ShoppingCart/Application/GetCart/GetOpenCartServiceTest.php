@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\Get;
 
-use Adrian\SirokoShoppingCart\ShoppingCart\Application\Get\GetCartItemsCountService;
 use Adrian\SirokoShoppingCart\ShoppingCart\Application\Get\GetOpenCartService;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
 use Adrian\SirokoShoppingCart\Tests\ShoppingCart\Domain\CartMother;

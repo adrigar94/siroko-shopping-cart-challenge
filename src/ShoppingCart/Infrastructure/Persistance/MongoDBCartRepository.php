@@ -10,7 +10,6 @@ use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartStatus;
 use MongoDB\Collection;
 use MongoDB\Database;
-use MongoDB\Model\BSONDocument;
 
 class MongoDBCartRepository implements CartRepository
 {
