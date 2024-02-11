@@ -1,5 +1,5 @@
 api:
     resource:
         path: ../src/Api/
-        namespace: Adrian\SirokoShoppingCart\Controller
+        namespace: Adrian\SirokoShoppingCart\Api
     type: attribute
