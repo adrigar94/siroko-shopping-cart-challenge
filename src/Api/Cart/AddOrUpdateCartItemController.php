@@ -23,7 +23,7 @@ class AddOrUpdateCartItemController extends AbstractController
     {
         $userUuid = $this->getUserUuidFromRequest($request);
 
-        $cartItemDto = $this->mapRequestToDto($request);
+        $cartItemDto = $this->mapRequestToDto($request, $sku);
 
         $this->addOrUpdateCartItemService->__invoke($userUuid, $cartItemDto);
 
@@ -32,18 +32,18 @@ class AddOrUpdateCartItemController extends AbstractController
 
     private function getUserUuidFromRequest(Request $request): string
     {
-        $userUuid = $request->request->get('user_uuid');
-        if (empty($userUuid)) {
+        $requestData = json_decode($request->getContent(), true);
+        if (!isset($requestData['user_uuid'])) {
             throw new \InvalidArgumentException('User uuid is required');
         }
-        return $userUuid;
+        return $requestData['user_uuid'];
     }
 
-    private function mapRequestToDto(Request $request): AddOrUpdateCartItemDto
+    private function mapRequestToDto(Request $request, $sku): AddOrUpdateCartItemDto
     {
         $requestData = json_decode($request->getContent(), true);
 
-        $requiredFields = ['sku', 'name', 'priceInCents', 'url', 'thumbnail', 'quantity'];
+        $requiredFields = ['name', 'priceInCents', 'url', 'thumbnail', 'quantity'];
         foreach ($requiredFields as $field) {
             if (!isset($requestData[$field])) {
                 throw new \InvalidArgumentException("$field is required");
@@ -51,7 +51,7 @@ class AddOrUpdateCartItemController extends AbstractController
         }
 
         return new AddOrUpdateCartItemDto(
-            $requestData['sku'],
+            $sku,
             $requestData['name'],
             $requestData['priceInCents'],
             $requestData['url'],
