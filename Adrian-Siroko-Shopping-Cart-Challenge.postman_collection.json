@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "2ceb2654-d824-4a56-ae1f-e5f7614a1aa5",
+		"name": "Adrian/Siroko-Shopping-Cart-Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12717234"
+	},
+	"item": [
+		{
+			"name": "Add or update product to cart",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_uuid\": \"b3949c1b-15c2-42d5-98e8-15d082696452\",\r\n    \"name\": \"Camiseta deportiva talla XL\",\r\n    \"priceInCents\": 1899,\r\n    \"url\": \"/products/12345678-xl\",\r\n    \"thumbnail\": \"/media/12345678\",\r\n    \"quantity\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cart/items/12345678",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cart",
+						"items",
+						"12345678"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_uuid\": \"b3949c1b-15c2-42d5-98e8-15d082696452\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cart/confirm",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cart",
+						"confirm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_uuid\": \"b3949c1b-15c2-42d5-98e8-15d082696452\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cart/items/12345679",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cart",
+						"items",
+						"12345679"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Total Number Products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_uuid\": \"b3949c1b-15c2-42d5-98e8-15d082696452\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cart/items-count",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cart",
+						"items-count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Open Cart",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_uuid\": \"b3949c1b-15c2-42d5-98e8-15d082696452\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cart",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
