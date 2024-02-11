@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\Confirm;
 
 use Adrian\SirokoShoppingCart\ShoppingCart\Application\Confirm\ConfirmCartService;
+use Adrian\SirokoShoppingCart\ShoppingCart\Domain\Cart;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
+use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartStatus;
 use Adrian\SirokoShoppingCart\Tests\ShoppingCart\Domain\CartMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +30,10 @@ class ConfirmCartServiceTest extends TestCase
             ->willReturn($cart);
 
         $this->repositoryMock->expects($this->once())
-            ->method('save');
+            ->method('save')
+            ->willReturnCallback(function (Cart $cartSaved) {
+                $this->assertEquals(CartStatus::CONFIRMED, $cartSaved->status());
+            });
 
         $service = new ConfirmCartService($this->repositoryMock);
         $service->__invoke($cart->userUuid());
