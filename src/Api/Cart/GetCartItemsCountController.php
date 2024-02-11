@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adrian\SirokoShoppingCart\Api\Cart;
 
-use Adrian\SirokoShoppingCart\ShoppingCart\Application\GetCart\GetCartItemsCountService;
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\Get\GetCartItemsCountService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

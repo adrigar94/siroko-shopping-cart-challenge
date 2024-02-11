@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adrian\SirokoShoppingCart\ShoppingCart\Application\GetCart;
+namespace Adrian\SirokoShoppingCart\ShoppingCart\Application\Get;
 
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
 

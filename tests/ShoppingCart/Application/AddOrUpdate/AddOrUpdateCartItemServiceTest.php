@@ -6,7 +6,7 @@ namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\AddOrUpdate;
 
 use Adrian\SirokoShoppingCart\ShoppingCart\Application\AddOrUpdate\AddOrUpdateCartItemDto;
 use Adrian\SirokoShoppingCart\ShoppingCart\Application\AddOrUpdate\AddOrUpdateCartItemService;
-use Adrian\SirokoShoppingCart\ShoppingCart\Application\GetCart\GetOpenOrCreateCartService;
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\Get\GetOpenOrCreateCartService;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
 use Adrian\SirokoShoppingCart\Tests\ShoppingCart\Domain\CartItemMother;
 use PHPUnit\Framework\MockObject\MockObject;

@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\GetCart;
+namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\Get;
 
-use Adrian\SirokoShoppingCart\ShoppingCart\Application\GetCart\GetCartItemsCountService;
-use Adrian\SirokoShoppingCart\ShoppingCart\Application\GetCart\GetOpenOrCreateCartService;
-use Adrian\SirokoShoppingCart\ShoppingCart\Domain\Cart;
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\Get\GetCartItemsCountService;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
 use Adrian\SirokoShoppingCart\Tests\ShoppingCart\Domain\CartMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Ramsey\Uuid\Uuid;
 
 class GetCartItemsCountServiceTest extends TestCase
 {

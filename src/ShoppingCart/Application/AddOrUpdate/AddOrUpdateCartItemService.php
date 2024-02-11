@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adrian\SirokoShoppingCart\ShoppingCart\Application\AddOrUpdate;
 
-use Adrian\SirokoShoppingCart\ShoppingCart\Application\GetCart\GetOpenOrCreateCartService;
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\Get\GetOpenOrCreateCartService;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartItem;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\Product;

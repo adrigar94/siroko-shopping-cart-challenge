@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\GetCart;
+namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\Get;
 
 use Adrian\SirokoShoppingCart\ShoppingCart\Application\Delete\DeleteCartItemService;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;

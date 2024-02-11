@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\GetCart;
+namespace Adrian\SirokoShoppingCart\Tests\ShoppingCart\Application\Get;
 
-use Adrian\SirokoShoppingCart\ShoppingCart\Application\GetCart\GetOpenOrCreateCartService;
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\Get\GetOpenOrCreateCartService;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\Cart;
 use Adrian\SirokoShoppingCart\ShoppingCart\Domain\CartRepository;
 use Adrian\SirokoShoppingCart\Tests\ShoppingCart\Domain\CartMother;
