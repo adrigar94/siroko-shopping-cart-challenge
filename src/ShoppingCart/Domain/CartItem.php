@@ -18,7 +18,7 @@ class CartItem
     public function toNative(): array
     {
         return [
-            'product' => $this->product,
+            'product' => $this->product->toNative(),
             'quantity' => $this->quantity
         ];
     }
