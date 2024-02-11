@@ -55,4 +55,4 @@ symfony serve:start
 ```
 
 ## Explore the API with Postman
-Para interactuar fácilmente con los endpoints, se proporciona una colección de Postman llamada Adrian-Siroko-Shopping-Cart-Challenge.postman_collection.json en el directorio raíz del proyecto. Importa esta colección en tu cliente de Postman para comenzar a realizar solicitudes y explorar la funcionalidad de la API.
+Para interactuar fácilmente con los endpoints, se proporciona una colección de Postman llamada [Adrian-Siroko-Shopping-Cart-Challenge.postman_collection.json](./Adrian-Siroko-Shopping-Cart-Challenge.postman_collection.json) en el directorio raíz del proyecto. Importa esta colección en tu cliente de Postman para comenzar a realizar solicitudes y explorar la funcionalidad de la API.
