@@ -6,15 +6,18 @@ use DateTimeImmutable;
 
 class Cart
 {
-    private array $items = [];
-    private int $totalItems = 0;
 
-    public function __construct(
+    /**
+     * @var CartItem[]
+     */
+    private function __construct(
         private string $uuid,
         private string $userUuid,
         private CartStatus $status,
         private DateTimeImmutable $createdAt,
-        private DateTimeImmutable $updatedAt
+        private DateTimeImmutable $updatedAt,
+        private int $totalItems = 0,
+        private array $items = []
     ) {
     }
 
@@ -99,5 +102,44 @@ class Cart
     public function totalItems(): int
     {
         return $this->totalItems;
+    }
+
+    public function toNative(): array
+    {
+        $itemsNative = [];
+        foreach ($this->items as $item) {
+            $itemsNative[$item->productId()] = $item->toNative();
+        }
+
+        return [
+            'uuid' => $this->uuid,
+            'user_uuid' => $this->userUuid,
+            'status' => $this->status->value,
+            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s'),
+            'items' => $itemsNative,
+            'totalItems' => $this->totalItems
+        ];
+    }
+
+    public static function fromNative(array $native): static
+    {
+        $cartItems = [];
+        foreach ($native['items'] as $itemNative) {
+            $cartItem = CartItem::fromNative($itemNative);
+            $cartItems[$cartItem->productId()] = $cartItem;
+        }
+
+        $cart = new static(
+            $native['uuid'],
+            $native['user_uuid'],
+            CartStatus::from($native['status']),
+            DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $native['created_at']),
+            DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $native['updated_at']),
+            $native['totalItems'],
+            $cartItems
+        );
+
+        return $cart;
     }
 }
