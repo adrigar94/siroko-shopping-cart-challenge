@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Adrian\SirokoShoppingCart\Api\Cart;
 
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\GetCart\GetCartItemsCountService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,10 +28,10 @@ class GetCartItemsCountController extends AbstractController
 
     private function getUserUuidFromRequest(Request $request): string
     {
-        $userUuid = $request->request->get('user_uuid');
-        if (empty($userUuid)) {
+        $requestData = json_decode($request->getContent(), true);
+        if (!isset($requestData['user_uuid'])) {
             throw new \InvalidArgumentException('User uuid is required');
         }
-        return $userUuid;
+        return $requestData['user_uuid'];
     }
 }
