@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Adrian\SirokoShoppingCart\Api\Cart;
 
+use Adrian\SirokoShoppingCart\ShoppingCart\Application\Delete\DeleteCartItemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,10 +28,10 @@ class DeleteCartItemController extends AbstractController
 
     private function getUserUuidFromRequest(Request $request): string
     {
-        $uuid = $request->request->get('user_uuid');
-        if (empty($uuid)) {
+        $requestData = json_decode($request->getContent(), true);
+        if (!isset($requestData['user_uuid'])) {
             throw new \InvalidArgumentException('User uuid is required');
         }
-        return $uuid;
+        return $requestData['user_uuid'];
     }
 }
